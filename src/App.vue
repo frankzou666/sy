@@ -1,30 +1,49 @@
+<template>
+  <div class="container">
+    <!-- 顶部组件 -->
+    <HospitalTop />
+
+    <!-- 帐由组件展示区域 -->
+    <div class="main">
+      <RouterView ></RouterView>
+    </div>
+
+
+    <!-- 底部组件 -->
+
+    <HospitalBottom />
+
+   
+  </div>
+</template>
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+  import { onMounted } from 'vue'
+  import request from '@/api/axios.ts'
+
+
+  
+
 </script>
 
-<template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-</template>
-
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  
+  .main{
+    flex: 1;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    width: 1200px;
+    margin:  0  auto;
+  }
+  
+
+
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
