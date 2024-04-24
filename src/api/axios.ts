@@ -1,8 +1,10 @@
 
 //对axios进行二次封装， 为什么要进行二次封装
-import axios from "axios";
+import axios from "axios"
+import { ElMessage } from "element-plus"
 
-import { ElMessage } from "element-plus";
+//引入userStore
+import useUserStore from '@/store/modules/user.ts'
 
 //创建aios实例
 const request = axios.create({
@@ -13,6 +15,13 @@ const request = axios.create({
 //请求拦截器
 request.interceptors.request.use((config) => {
     //提供的一个配置对像，这个config身上有一个headers的公共参数
+
+    //如果有token,就需要加上
+    let userStore = useUserStore()
+    if(userStore.userInfo.token) {
+        config.headers.token=userStore.userInfo.token
+    }
+
     return config;
 })
 

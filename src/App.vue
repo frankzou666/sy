@@ -11,18 +11,58 @@
 
     <!-- 底部组件 -->
 
-    <HospitalBottom />
+    <HospitalBottom id="myAudi" />
+
+    <!-- 登录组件 -->
+    <Login />
+
+    <audio ref="autoRef" autoplay :src="src" muted="true"></audio>
 
    
   </div>
 </template>
 <script setup lang="ts">
-  import { onMounted } from 'vue'
-  import request from '@/api/axios.ts'
+  import { onMounted,ref } from 'vue'
+  import { ElMessage } from 'element-plus';
 
+  import request from '@/api/axios.ts'
+  import userStore from '@/store/modules/user.ts'
+ 
+
+  //增加socket
+  let SID= Math.round(Math.random()*100000)
+  let WS_URL="ws://localhost:8090/ws/"+SID
+  let webSocket = new WebSocket(WS_URL)
+  let autoRef = ref(null)
+  let src=ref()
+
+  onMounted(()=>{
+    let $myAudi = document.getElementById("main")
+    //
+    $myAudi?.click()
+   
+     
+  })
+
+
+  // webSocket.onmessage=function(msg) {
+  //   // ElMessage({
+  //   //   type:"success",
+  //   //   message:msg.data,
+  //   // })
+  //    ElMessage({
+  //       type:"success",
+  //       message:msg.data,
+  //     })
+  //   let audit = new Audio()
+  //   audit.src="./src/assets/images/xm2540.wav"
+  //   audit.play()
+    
+  //   setTimeout(()=>audit.pause(),2000) 
+
+  // }
 
   
-
 </script>
 
 <style scoped>

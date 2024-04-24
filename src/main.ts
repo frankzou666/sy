@@ -17,6 +17,7 @@ import store from '@/store/index.ts'
 //引入全局组件
 import HospitalTop from '@/components/hospital-top/index.vue'
 import HospitalBottom from '@/components/hospital-bottom/index.vue'
+import Login from '@/components/login/index.vue'
 
 
 
@@ -40,6 +41,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 //注册全局组件
 app.component('HospitalTop',HospitalTop)
 app.component('HospitalBottom',HospitalBottom)
+app.component('Login',Login)
 
 app.use(store)
 

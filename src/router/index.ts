@@ -31,6 +31,13 @@ const routes = [
                 path:'register',
                 component:()=>import('@/pages/hospital/register/index.vue')
             },
+            // 挂号路由
+
+            {
+                path:'registerstep1',
+                component:()=>import('@/pages/hospital/register/register_step1.vue')
+            },
+
             {
                 path:'search',
                 component:()=>import('@/pages/hospital/search/index.vue')
@@ -47,6 +54,13 @@ const routes = [
         //重定向
         path:'/',
         redirect:'/home'
+    },
+
+    //微信登录回调
+    {
+        path:'/wxlogin',
+        //路由懒加载模式
+        component:()=>import('@/pages/wxlogin/index.vue')
     },
 ]
 
