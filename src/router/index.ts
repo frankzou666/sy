@@ -31,12 +31,20 @@ const routes = [
                 path:'register',
                 component:()=>import('@/pages/hospital/register/index.vue')
             },
-            // 挂号路由
+            // 挂号路由1
 
             {
                 path:'registerstep1',
                 component:()=>import('@/pages/hospital/register/register_step1.vue')
             },
+
+            // 挂号路由2
+
+            {
+                path:'registerstep2',
+                component:()=>import('@/pages/hospital/register/register_step2.vue')
+            },
+
 
             {
                 path:'search',

@@ -9,6 +9,7 @@ import {
     IntLoginInfoResponse,
     IntWxLoginInfoResponse,
     IntHospitalWorkData,
+    IntHospitalDoctorWorking,
     } from './type.ts'
 
 
@@ -29,6 +30,12 @@ enum API {
 
     //获取某一个医院的挂号数据
     BOOKINGHOSPITAL_URL= '/hosp/hospital/auth/getBookingScheduleRule/',
+
+    //获取某一天某医院某科室某医生的排班情况
+    HOSPITALDOCTOR_URL = '/hosp/hospital/auth/findScheduleList/',
+
+    //获取就诊人
+    PATIENTALL_URL = '/user/patient/auth/findAll',
 
 } 
 
@@ -66,4 +73,14 @@ export const reqWxLoginParam=(wxRedirectUri:string)=>{
 //获取预约挂号数据
 export const reqHospitalWorking=(page:number,limit:number,hoscode:string,depcode:string)=>{
     return request.get<any,IntHospitalWorkData>(API.BOOKINGHOSPITAL_URL+`${page}/${limit}/${hoscode}/${depcode}`)
+}
+
+//获取医生排班的数据
+export const reqHospitalDoctorWorking =(hoscode:string,depcode:string,workDate:String) => {
+    return request.get<any,IntHospitalDoctorWorking>(API.HOSPITALDOCTOR_URL+`${hoscode}/${depcode}/${workDate}`)
+}
+
+//获取获取就诊人信息
+export const reqPatientAll =() => {
+    return request.get<any,any>(API.PATIENTALL_URL)
 }

@@ -68,7 +68,9 @@
   })
  
   const getHospital= async ()=>{
+    console.log("ok")
     let result:IntHospitalResponse  =  await reqHospital(pageNo.value,pageSize.value,hostype.value,districtcode.value)
+    console.log(result)
     if (result.code==200) {
         hasHospitals.value = result.data.content
         total.value= result.data.totalElements

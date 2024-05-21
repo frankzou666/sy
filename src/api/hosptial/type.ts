@@ -133,3 +133,64 @@ export interface IntHospitalWorkData extends IntResponse {
 }
 
 
+//返回一个医生的数据
+
+export interface Doctor {
+
+  "id": string,
+  "createTime": string,
+  "updateTime": string,
+  "isDeleted": number,
+  "param": {
+    "dayOfWeek":string,
+    "depname": string,
+    "hosname": string
+  },
+  "hoscode": string,
+  "depcode": string,
+  "title": string,
+  "docname": string,
+  "skill": string,
+  "workDate": string,
+  "workTime": number,
+  "reservedNumber": number,
+  "availableNumber": number,
+  "amount": number,
+  "status": number,
+  "hosScheduleId": number
+}
+
+export type TypeDoctor  = Doctor[]
+
+//定义医生科室排班接口返回的数据类型
+
+export interface IntHospitalDoctorWorking extends IntResponse {
+  data:TypeDoctor
+}
+
+//就诊人
+
+export interface Patient {
+
+  "id": string,
+  "createTime": string,
+  "updateTime": string,
+  "isDeleted": number,
+  "param": {
+    "certificatesTypeString":string,
+    "contactsCertificatesTypeString": string,
+    "hosname": string
+  },
+  "userId": number,
+  "name": string,
+  "certificatesType": string,
+  "certificatesNo": string,
+}
+
+
+export type TypePatient = Patient[]
+
+//获取所有就诊人信息
+export interface IntPatientAll extends IntResponse {
+   data:TypePatient
+}
