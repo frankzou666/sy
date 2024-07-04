@@ -31,6 +31,8 @@ const routes = [
                 path:'register',
                 component:()=>import('@/pages/hospital/register/index.vue')
             },
+
+           
             // 挂号路由1
 
             {
@@ -62,6 +64,35 @@ const routes = [
         //重定向
         path:'/',
         redirect:'/home'
+    },
+
+     //会员中心
+     {
+        path:'/user',
+        component: ()=>import('@/pages/user/index.vue'),
+        children:[
+            {
+                path:'order',
+                component:()=>import('@/pages/user/order/index.vue'),
+            },
+            {
+                path:'certification',
+                component:()=>import('@/pages/user/certification/index.vue'),
+            },
+            {
+                path:'feedback',
+                component:()=>import('@/pages/user/feedback/index.vue'),
+            },
+            {
+                path:'patient',
+                component:()=>import('@/pages/user/patient/index.vue'),
+            },
+            {
+                path:'profile',
+                component:()=>import('@/pages/user/profile/index.vue'),
+            },
+
+        ]
     },
 
     //微信登录回调

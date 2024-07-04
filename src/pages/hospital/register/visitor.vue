@@ -1,58 +1,63 @@
+<template>
+    <div class="P-visitor">
+        <div class="top">
+            <div class="left">
+                <div class="symbol">医保</div>
+                <div class="username">{{ patient.name }}</div>
+            </div>
+            <div class="right">
+                <el-button type="primary" :icon="Edit" circle></el-button>
+            </div>
+        </div>
+
+        <div class="bottom">
+            <p class="idType">证件类型: <span>身份证</span></p>
+            <p class="idNumber">证件号码: <span>42323232323232323</span></p>
+            <p class="sexy">用户性别: <span>男</span></p>
+            <p class="birth">出生日期: <span>1982-02-02</span></p>
+            <p class="mobile">手机号码: <span>13520393349</span></p>
+            <p class="currentAddress">当前住址: <span>北京市</span></p>
+            <p class="detailAddress">详细地址: <span>海淀海淀海淀海淀海淀海淀海淀海淀海淀</span></p>
+            <transition name="confirm">
+                <div class="confirm" v-if="currentPatientIndex == index">已选择</div>
+            </transition>
+
+        </div>
 
 
- <template>
-   <div class="P-visitor">
-      <div class="top">
-         <div class="left">
-             <div class="symbol">医保</div>
-             <div class="username">{{ patient.name }}</div>
-         </div>
-         <div class="right">
-            <el-button type="primary" :icon="Edit" circle></el-button>
-         </div>
-      </div>
+    </div>
+</template>
 
-      <div class="bottom">
-         <p class="idType">证件类型: <span>身份证</span></p>
-         <p class="idNumber">证件号码: <span>42323232323232323</span></p>
-         <p class="sexy">用户性别: <span>男</span></p>
-         <p class="birth">出生日期: <span>1982-02-02</span></p>
-         <p class="mobile">手机号码: <span>13520393349</span></p>
-         <p class="currentAddress">当前住址: <span>北京市</span></p>
-         <p class="detailAddress">详细地址: <span>海淀海淀海淀海淀海淀海淀海淀海淀海淀</span></p>
-      </div>
-      
- 
-   </div>
- </template>
+<script setup lang='ts'>
+import { Edit } from '@element-plus/icons-vue';
+import { defineProps } from 'vue';
 
- <script setup lang='ts'>
- import { Edit } from '@element-plus/icons-vue';
- import { defineProps } from 'vue';
-  
- //子组件接到父组件传过来的参数
- defineProps(['patient'])
+//子组件接到父组件传过来的参数
+defineProps(['patient', 'currentPatientIndex', 'index'])
 
- 
 
- 
- </script>
- <style scoped lang="scss">
- .P-visitor{
+
+
+</script>
+<style scoped lang="scss">
+.P-visitor {
     margin-top: 20px;
-    box-shadow: 0px 0px 12px rgba(0,0,0,0.12);
-    .top{
+    height: 330px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+
+    .top {
         height: 60px;
         background-color: #e5e5e5;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
-        .left{
+
+        .left {
             margin: 0px 12px;
             display: flex;
             color: #7f7f7f;
-            .symbol{
+
+            .symbol {
                 font-size: 11px;
                 background-color: #fff;
                 width: 30px;
@@ -60,32 +65,65 @@
                 text-align: center;
                 padding-top: 2px;
             }
-            .username{
+
+            .username {
                 padding-left: 5px;
                 font-size: 18px;
             }
         }
-        .right{
+
+        .right {
             margin: 0 10px;
         }
-        
+
     }
-    .bottom{
+
+    .bottom {
+        position: relative;
         margin: 15px 10px;
         font-size: 14px;
         color: #1f1f1f;
-        p{
+
+        p {
             margin-bottom: 20px;
-            span{
+
+            span {
                 color: #7f7f7f;
             }
         }
 
+        .confirm {
+            position: relative;
+            color: red;
+            width: 200px;
+            height: 200px;
+            border: 1px dashed red;
+            border-radius: 50%;
+            line-height: 200px;
+            text-align: center;
+            opacity: 70%;
+            left: 10%;
+            top: -225px;
+            font-size: 24px;
+            font-weight: bold;
+            transform: rotate(35deg);
+        }
+
+        .confirm-enter-from {
+            transform: scale(1);
+
+        }
+
+        .confirm-enter-active {
+            transition: all .3s;
+        }
+
+        .confirm-enter-to {
+            transform: scale(1.2);
+
+        }
+
+
     }
- }
- 
- 
- 
- 
- 
- </style>
+}
+</style>

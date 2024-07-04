@@ -15,7 +15,12 @@
                 </template>
                 <!-- 就诊人封装 -->
                 <div class="users">
-                    <Visitor class="item" v-for="patient in patientArr" :key="patient.id" :patient="patient"></Visitor>
+                    <Visitor @click="getCurrentPatient(index)" class="item" v-for="(patient,index) in patientArr" 
+                    :key="patient.id" 
+                    :index = index
+                    :currentPatientIndex = "currentPatientIndex"
+                    :patient="patient">
+                </Visitor>
                 </div>
 
 
@@ -103,7 +108,7 @@
         <!-- 挂号按钮 -->
 
         <div class="bottomBtn">
-            <el-button type="success" class="confirmBtn">确认挂号</el-button>
+            <el-button type="success" class="confirmBtn" :disabled ="currentPatientIndex==-1?true:false" @click="submitOrder">确认挂号</el-button>
 
         </div>
 
@@ -112,17 +117,30 @@
 </template>
 <script setup lang='ts'>
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { reqPatientAll } from '@/api/hosptial/index'
+import { useRoute,useRouter } from 'vue-router'
 
-import type { IntPatientAll, TypePatient } from '@/api/hosptial/type'
-import { ElMessage } from 'element-plus';
+
 import { InputNumberInstance } from 'element-plus/lib/components/index.js';
 import Visitor from './visitor.vue'
+
+import type { IntPatientAll, TypePatient } from '@/api/hosptial/type'
+
+import type { IntSubmitOrderResponseData } from '@/api/user/type'
+import { reqPatientAll } from '@/api/hosptial/index'
+import { reqSubmitOrder } from '@/api/user/index'
+import { ElMessage } from 'element-plus';
 
 //就诊有人信息
 
 let patientArr = ref<TypePatient>([])
+
+//保存当前点的
+
+let currentPatientIndex = ref<number>(-1);
+
+let $route = useRoute()
+
+const $router = useRouter()
 
 
 //挂载当前用户的就诊人信息
@@ -137,6 +155,33 @@ const getPatientAll=async ()=>{
     if (result.code===200) {
         patientArr.value = result.data
     }
+}
+
+//获取当前就诊人数组的索引信息
+const getCurrentPatient=(index:number)=>{
+   // console.log(index);
+    currentPatientIndex.value = index
+
+} 
+
+//确认挂号，提交订单
+const submitOrder= async ()=>{
+  //医院编号
+  let hosCode = <string>$route.query.hoscode
+  let scheduleId = <string>$route.query.doctorId
+  let patientId =  <number>patientArr.value[currentPatientIndex.value].id
+  let result:IntSubmitOrderResponseData = await reqSubmitOrder(hosCode,scheduleId,patientId)
+  //如果订单创建成功，则跳转到订单详情页面
+  if (result.code===200) {
+        $router.push({path:'/user/order',query:{orderId:result.data}})
+  } else {
+    ElMessage({
+        type:"error",
+        message: result.message
+    })
+  }
+
+    
 }
 
 </script>

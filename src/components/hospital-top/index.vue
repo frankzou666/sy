@@ -16,9 +16,9 @@
                </span>
             <template #dropdown>
                <el-dropdown-menu>
-                  <el-dropdown-item command="a">实名认证</el-dropdown-item>
-                  <el-dropdown-item command="b">挂号订单</el-dropdown-item>
-                  <el-dropdown-item command="c">就诊人管理</el-dropdown-item>
+                  <el-dropdown-item command="a" @click="changeActive('/user/certification','实名认证')">实名认证</el-dropdown-item>
+                  <el-dropdown-item command="b" @click="changeActive('/user/order','挂号订单')">挂号订单</el-dropdown-item>
+                  <el-dropdown-item command="c" @click="changeActive('/user/patient','就诊人管理')">就诊人管理</el-dropdown-item>
                   <el-dropdown-item command="e" @click="logout">退出登录</el-dropdown-item>
                </el-dropdown-menu>
             </template>
@@ -66,6 +66,12 @@
 
     $router.push({path:"/"});
   }
+
+  //菜单跳转
+  let changeActive=(path:string)=>{
+     
+     $router.push(path)
+   }
 
 
  </script>

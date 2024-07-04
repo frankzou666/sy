@@ -214,7 +214,6 @@ const clickDocData = (item: any) => {
     if (item.status !== -1) {
         docStatus.value = item.status
         workTime.value = item
-        console.log(workTime.value.workData)
         if (item.status ===0){
             fetechDocWorkData()
         }
@@ -225,7 +224,6 @@ const clickDocData = (item: any) => {
 
 //单击挂号
 const handleDoctor=(doctorId:any)=>{
-    console.log(doctorId)
    $router.push({path:"/hospital/registerstep2",query:{hoscode:$route.query.hoscode,depcode:$route.query.hoscode,doctorId:doctorId}})
 }
 
